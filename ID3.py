@@ -1,3 +1,9 @@
+##AUTHOR: ROMAN BELAIRE
+##NOVEMBER 10TH, 2019
+#
+#This program contains my implementation of the ID3 decision tree algorithm.
+#
+##################
 import pandas as pd
 import math
 import argparse
