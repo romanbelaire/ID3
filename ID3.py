@@ -31,10 +31,10 @@ def InformationGain(condition, feature, input_dataframe, condition_value):
         equation_string += ' - '
         conditional_subset = input_dataframe[input_dataframe[feature] == unique_value][condition]
         try:
-            numerator = conditional_subset.value_counts()[condition_value]
-            denominator = len(conditional_subset)
+            numerator = len(conditional_subset)#.value_counts()[condition_value]
+            denominator = len(input_dataframe)
             equation_string += '(' + str(numerator) + '/' + str(denominator) + ')'
-            probability_type = conditional_subset.value_counts()[condition_value] / len(input_dataframe)#members of feature where condition is met / total members of
+            probability_type = numerator / denominator#members of feature where condition is met / total members of
         except:
             equation_string += '0'
             probability_type = 0 #condition_value not found in set
@@ -62,7 +62,7 @@ def SelectRoot(condition, features, subset, condition_value, current_feature, fe
         if feature_ig >= best_feature_IG:
             best_feature_IG = feature_ig
             best_feature = feature
-    print("Node created: %s @ %d -> %s, IG = %s" % (condition, condition_value, best_feature, best_feature_IG))
+    print("Node created: %s @ %d -> %s, IG = %s" % (current_feature, feature_value, best_feature, best_feature_IG))
     print("removing %s from %s " % (best_feature, features))
     features.remove(best_feature)
     for unique_value in subset[best_feature].unique():
